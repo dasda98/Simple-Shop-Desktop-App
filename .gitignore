@@ -1,0 +1,22 @@
+﻿# Visual Studio code files
+.vs/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+[Bb]in/
+[Oo]bj/
+
+# NuGet packages
+*.nuget.props
+*.nuget.targets
+*.lock.json
