@@ -1,4 +1,5 @@
 ﻿using MarketApp.Context;
+using MarketApp.Interfaces;
 using MarketApp.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MarketApp.Repositories
 {
-    public class OrderItemRepository
+    public class OrderItemRepository : IOrderItemRepository
     {
         private readonly DatabaseContext _databaseContext;
 
