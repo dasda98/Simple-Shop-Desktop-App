@@ -13,10 +13,10 @@ namespace MarketApp.Models
     {
         [Key]
         [Column("order_item_id")]
-        public int order_item_id { get; set; }
+        public int OrderItemId { get; set; }
 
         [Column("quantity")]
-        public int quantity { get; set; }
+        public int Quantity { get; set; }
 
         [ForeignKey("order_id")]
         public virtual Order Order { get; set; }
