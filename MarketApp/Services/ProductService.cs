@@ -19,22 +19,22 @@ namespace MarketApp.Services
 
         public void AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            _productRepository.AddProduct(product);
         }
 
         public void DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            _productRepository.DeleteProduct(productId);
         }
 
         public Product GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetById(productId);
         }
 
         public void UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            _productRepository.UpdateProduct(product);
         }
     }
 }

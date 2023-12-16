@@ -19,22 +19,22 @@ namespace MarketApp.Services
 
         public void AddOrder(Order order)
         {
-            throw new NotImplementedException();
+            _orderRepository.AddOrder(order);
         }
 
         public void DeleteOrder(int orderId)
         {
-            throw new NotImplementedException();
+            _orderRepository.DeleteOrder(orderId);
         }
 
         public Order GetOrderById(int orderId)
         {
-            throw new NotImplementedException();
+            return _orderRepository.GetById(orderId);
         }
 
         public void UpdateOrder(Order order)
         {
-            throw new NotImplementedException();
+            _orderRepository.UpdateOrder(order);
         }
     }
 }

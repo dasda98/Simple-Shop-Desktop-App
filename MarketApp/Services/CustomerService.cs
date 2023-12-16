@@ -19,22 +19,22 @@ namespace MarketApp.Services
 
         public void AddCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerRepository.AddCustomer(customer);
         }
 
         public void DeleteCustomer(int customerId)
         {
-            throw new NotImplementedException();
+            _customerRepository.DeleteCustomer(customerId);
         }
 
         public Customer GetCustomerById(int customerId)
         {
-            throw new NotImplementedException();
+            return _customerRepository.GetById(customerId);
         }
 
         public void UpdateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerRepository.UpdateCustomer(customer);
         }
     }
 }
