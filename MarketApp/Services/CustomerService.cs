@@ -1,10 +1,5 @@
 ﻿using MarketApp.Interfaces;
 using MarketApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MarketApp.Services
 {
@@ -27,9 +22,14 @@ namespace MarketApp.Services
             _customerRepository.DeleteCustomer(customerId);
         }
 
+        public List<Customer> GetAllCustomers()
+        {
+            return _customerRepository.GetAllCustomers();
+        }
+
         public Customer GetCustomerById(int customerId)
         {
-            return _customerRepository.GetById(customerId);
+            return _customerRepository.GetCustomerById(customerId);
         }
 
         public void UpdateCustomer(Customer customer)

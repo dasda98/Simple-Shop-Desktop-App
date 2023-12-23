@@ -18,7 +18,7 @@ namespace MarketApp.Repositories
             _databaseContext = databaseContext;
         }
 
-        public Customer GetById(int id)
+        public Customer GetCustomerById(int id)
         {
             return _databaseContext.Customers.FirstOrDefault(c => c.CustomerId == id);
         }
@@ -37,12 +37,17 @@ namespace MarketApp.Repositories
 
         public void DeleteCustomer(int id)
         {
-            var customer = GetById(id);
+            var customer = GetCustomerById(id);
             if (customer != null)
             {
                 _databaseContext.Customers.Remove(customer);
                 _databaseContext.SaveChanges();
             }
+        }
+
+        public List<Customer> GetAllCustomers()
+        {
+            return _databaseContext.Customers.ToList();
         }
     }
 }

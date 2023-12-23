@@ -9,14 +9,6 @@
       Title="CustomerPage">
 
     <Grid Background="White">
-        <ListView x:Name="lvCustomers" ItemsSource="{Binding Customers}" Margin="10,10,607,10">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
-                    <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-
+        <DataGrid Name="dgCustomers" ItemsSource="{Binding Customers}" Margin="10,10,300,225"/>
     </Grid>
 </Page>
