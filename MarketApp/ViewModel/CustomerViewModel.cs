@@ -1,7 +1,13 @@
 ﻿using MarketApp.Helpers;
 using MarketApp.Interfaces;
 using MarketApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace MarketApp.ViewModel
 {
@@ -21,14 +27,105 @@ namespace MarketApp.ViewModel
             }
         }
 
+        public ICommand AddCustomerCommand { get; }
+
         public CustomerViewModel(ICustomerService customerService) {
             _customerService = customerService;
             LoadCustomers();
+
+            AddCustomerCommand = new RelayCommand(AddCustomer, CanAddCustomer);
         }
 
         private void LoadCustomers()
         {
             _customers = new ObservableCollection<Customer>(_customerService.GetAllCustomers());
+        }
+
+        private string _firstName;
+        private string _lastName;
+        private string _email;
+        private string _phoneNumber;
+
+        public string FirstName
+        {
+            get { return _firstName; }
+            set
+            {
+                if (_firstName != value)
+                {
+                    _firstName = value;
+                    OnPropertyChanged(nameof(FirstName));
+                }
+            }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set
+            {
+                if (_lastName != value)
+                {
+                    _lastName = value;
+                    OnPropertyChanged(nameof(LastName));
+                }
+            }
+        }
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged(nameof(Email));
+                }
+            }
+        }
+        public string PhoneNumber
+        {
+            get { return _phoneNumber; }
+            set
+            {
+                if (_phoneNumber != value)
+                {
+                    _phoneNumber = value;
+                    OnPropertyChanged(nameof(PhoneNumber));
+                }
+            }
+        }
+
+        private void AddCustomer(object parameter)
+        {
+            // Tutaj dodaj kod obsługujący dodawanie do bazy danych
+            Customer newCustomer = new Customer { FirstName=FirstName, LastName=LastName, Email=Email, PhoneNumber=PhoneNumber };
+            _customerService.AddCustomer(newCustomer);
+            _customers.Add(newCustomer);
+
+            // Wyczyszczenie pól po dodaniu do bazy danych (opcjonalne)
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Email = string.Empty;
+            PhoneNumber = string.Empty;
+
+            
+        }
+
+        private bool CanAddCustomer(object parameter)
+        {
+            // Tutaj dodaj warunki sprawdzające, czy można dodać dane
+            bool isFirstName = string.IsNullOrEmpty(FirstName);
+            bool isLastName = string.IsNullOrEmpty(LastName);
+            bool isEmail = string.IsNullOrEmpty(Email);
+            bool isPhone = string.IsNullOrEmpty(PhoneNumber);
+
+            if (!isFirstName && !isLastName && !isEmail && !isPhone) { 
+                return true;
+            } else
+            {
+                return false;
+            }
+
         }
     }
 }

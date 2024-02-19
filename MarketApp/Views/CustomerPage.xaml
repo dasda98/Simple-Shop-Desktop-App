@@ -9,6 +9,25 @@
       Title="CustomerPage">
 
     <Grid Background="White">
-        <DataGrid Name="dgCustomers" ItemsSource="{Binding Customers}" Margin="10,10,300,225"/>
+        <DockPanel LastChildFill="False">
+            <DataGrid x:Name="dgCustomers" ItemsSource="{Binding Customers}" Margin="10,10,300,225" Width="477" />
+        </DockPanel>
+
+        <StackPanel Margin="490,0,0,0">
+            <Label Content="First Name" Width="121"/>
+            <TextBox x:Name="FirstName" TextWrapping="Wrap"  Width="120" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Last Name" Width="121"/>
+            <TextBox x:Name="LastName" TextWrapping="Wrap"  Width="120" Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Email" Width="121"/>
+            <TextBox x:Name="Email" TextWrapping="Wrap"  Width="120" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Phone Number" Width="121"/>
+            <TextBox x:Name="PhoneNumber" TextWrapping="Wrap"  Width="120" Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid>
+                <Button Content="Add" Margin="10,10,225,0" Width="50" Command="{Binding AddCustomerCommand}"/>
+                <Button Content="Update" Margin="118,10,117,0" Width="50" />
+                <Button Content="Delete" Margin="225,10,10,0" Width="50"/>
+            </Grid>
+        </StackPanel>
+
     </Grid>
 </Page>
