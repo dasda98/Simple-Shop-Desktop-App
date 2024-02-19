@@ -14,7 +14,6 @@ namespace MarketApp.ViewModel
     public class CustomerViewModel : ViewModelBase
     {
         private readonly ICustomerService _customerService;
-
         private ObservableCollection<Customer> _customers;
         public ObservableCollection<Customer> Customers { 
             get {  return _customers; }
@@ -28,12 +27,16 @@ namespace MarketApp.ViewModel
         }
 
         public ICommand AddCustomerCommand { get; }
+        public ICommand DeleteCustomerCommand { get; }
+        public ICommand EditCustomerCommand { get; }
 
         public CustomerViewModel(ICustomerService customerService) {
             _customerService = customerService;
             LoadCustomers();
 
             AddCustomerCommand = new RelayCommand(AddCustomer, CanAddCustomer);
+            DeleteCustomerCommand = new RelayCommand(DeleteCustomer);
+            EditCustomerCommand = new RelayCommand(EditCustomer);
         }
 
         private void LoadCustomers()
@@ -97,23 +100,18 @@ namespace MarketApp.ViewModel
 
         private void AddCustomer(object parameter)
         {
-            // Tutaj dodaj kod obsługujący dodawanie do bazy danych
             Customer newCustomer = new Customer { FirstName=FirstName, LastName=LastName, Email=Email, PhoneNumber=PhoneNumber };
             _customerService.AddCustomer(newCustomer);
             _customers.Add(newCustomer);
 
-            // Wyczyszczenie pól po dodaniu do bazy danych (opcjonalne)
             FirstName = string.Empty;
             LastName = string.Empty;
             Email = string.Empty;
             PhoneNumber = string.Empty;
-
-            
         }
 
         private bool CanAddCustomer(object parameter)
         {
-            // Tutaj dodaj warunki sprawdzające, czy można dodać dane
             bool isFirstName = string.IsNullOrEmpty(FirstName);
             bool isLastName = string.IsNullOrEmpty(LastName);
             bool isEmail = string.IsNullOrEmpty(Email);
@@ -125,7 +123,44 @@ namespace MarketApp.ViewModel
             {
                 return false;
             }
+        }
 
+        private void DeleteCustomer(object parameter)
+        {
+            _customerService.DeleteCustomer(_selectedCustomer.CustomerId);
+            _customers.Remove(_selectedCustomer);
+        }
+
+        private Customer _selectedCustomer;
+        public Customer SelectedCustomer
+        {
+            get { return _selectedCustomer; }
+            set
+            {
+                if (_selectedCustomer != value)
+                {
+                    _selectedCustomer = value;
+                    OnPropertyChanged(nameof(SelectedCustomer));
+                    FillBoxSelectedCustomer(_selectedCustomer);
+                }
+            }
+        }
+
+        private void FillBoxSelectedCustomer(Customer customer)
+        {
+            if (customer != null)
+            {
+                FirstName = customer.FirstName;
+                LastName = customer.LastName;
+                Email = customer.Email;
+                PhoneNumber = customer.PhoneNumber;
+            }
+        }
+
+        private void EditCustomer(object parameter)
+        {
+            _customerService.UpdateCustomer(_selectedCustomer);
+            LoadCustomers();
         }
     }
 }
