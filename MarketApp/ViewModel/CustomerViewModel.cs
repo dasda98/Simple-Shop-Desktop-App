@@ -7,7 +7,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Xml.Linq;
+using System.Linq;
+using System.Windows.Data;
 
 namespace MarketApp.ViewModel
 {
@@ -36,7 +37,7 @@ namespace MarketApp.ViewModel
 
             AddCustomerCommand = new RelayCommand(AddCustomer, CanAddCustomer);
             DeleteCustomerCommand = new RelayCommand(DeleteCustomer);
-            EditCustomerCommand = new RelayCommand(EditCustomer);
+            EditCustomerCommand = new RelayCommand(EditCustomer, CanEditCustomer);
         }
 
         private void LoadCustomers()
@@ -131,7 +132,7 @@ namespace MarketApp.ViewModel
             _customers.Remove(_selectedCustomer);
         }
 
-        private Customer _selectedCustomer;
+        private Customer? _selectedCustomer;
         public Customer SelectedCustomer
         {
             get { return _selectedCustomer; }
@@ -159,8 +160,25 @@ namespace MarketApp.ViewModel
 
         private void EditCustomer(object parameter)
         {
+            _selectedCustomer.FirstName = _firstName;
+            _selectedCustomer.LastName = _lastName;
+            _selectedCustomer.Email = _email;
+            _selectedCustomer.PhoneNumber = _phoneNumber;
+
             _customerService.UpdateCustomer(_selectedCustomer);
-            LoadCustomers();
+
+            CollectionViewSource.GetDefaultView(Customers).Refresh();
+
+            _selectedCustomer = null;
+        }
+
+        private bool CanEditCustomer(object parameter)
+        {
+           if (_selectedCustomer != null)
+            {
+                return true;
+            }
+           return false;
         }
     }
 }

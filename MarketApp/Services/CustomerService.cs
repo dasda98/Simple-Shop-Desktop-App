@@ -34,6 +34,7 @@ namespace MarketApp.Services
 
         public void UpdateCustomer(Customer customer)
         {
+
             _customerRepository.UpdateCustomer(customer);
         }
     }
