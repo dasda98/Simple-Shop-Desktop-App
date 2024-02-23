@@ -9,9 +9,7 @@ namespace MarketApp.Context
     public class DatabaseContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +24,16 @@ namespace MarketApp.Context
 
                 optionsBuilder.UseNpgsql(connectionString);
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("test");
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Orders)
+                .WithOne(e => e.Customer)
+                .HasForeignKey(e => e.CustomerId)
+                .IsRequired();
         }
     }
 }
