@@ -8,8 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="TabItem">
+            <TabItem Header="Customer">
                 <Frame Source="CustomerPage.xaml" />
+            </TabItem>
+            <TabItem Header="Order">
+                <Frame Source="OrderPage.xaml" />
             </TabItem>
         </TabControl>
 

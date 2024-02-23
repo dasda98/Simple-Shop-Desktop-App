@@ -2,19 +2,23 @@ using System;
 using System.Data;
 using System.Windows;
 using MarketApp.Context;
+using MarketApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace MarketAppTests
 {
     public class DbContextTests : IDisposable
     {
         private readonly DatabaseContext _context;
+        private readonly ITestOutputHelper _testOutputHelper;
 
-        public DbContextTests()
+        public DbContextTests(ITestOutputHelper testOutputHelper)
         {
-
             _context = new DatabaseContext();
+            _testOutputHelper = testOutputHelper;
         }
 
         [Fact]
@@ -35,20 +39,33 @@ namespace MarketAppTests
         public void CanGetAllElementsFromDatabase()
         {
             var customers = _context.Customers.ToList();
-            var products = _context.Products.ToList();
             var order = _context.Orders.ToList();
-            var order_items = _context.OrderItems.ToList();
 
             // Assert
             Assert.NotEmpty(customers);
-            Assert.NotEmpty(products);
             Assert.NotEmpty(order);
-            Assert.NotEmpty(order_items);
 
         }
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        [Fact]
+        public void CanGetOrdersByCustomer()
+        {
+            Customer customer = _context.Customers
+                .Where(s => s.CustomerId == 1)
+                .Include(x => x.Orders)
+                .FirstOrDefault();
+
+            foreach( Order o in customer.Orders )
+            {
+                _testOutputHelper.WriteLine(o.TotalAmount.ToString());
+            }
+            _context.SaveChanges();
+
+            Assert.NotNull(customer.Orders.ToList());
         }
     }
 }

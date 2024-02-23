@@ -22,6 +22,11 @@ namespace MarketApp.Services
             _orderRepository.DeleteOrder(orderId);
         }
 
+        public List<Order> GetAllOrders()
+        {
+            return _orderRepository.GetAllOrders();
+        }
+
         public Order GetOrderById(int orderId)
         {
             return _orderRepository.GetById(orderId);

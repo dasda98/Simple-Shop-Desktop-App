@@ -34,6 +34,11 @@ namespace MarketApp
 
             services.AddTransient<CustomerViewModel>();
 
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+
+            services.AddTransient<OrderViewModel>();
+
             return services.BuildServiceProvider();
         }
 

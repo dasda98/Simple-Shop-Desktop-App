@@ -39,5 +39,9 @@ namespace MarketApp.Repositories
                 _databaseContext.SaveChanges();
             }
         }
+        public List<Order> GetAllOrders()
+        {
+            return _databaseContext.Orders.ToList();
+        }
     }
 }
