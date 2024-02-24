@@ -10,23 +10,30 @@
 
     <Grid Background="White">
         <DockPanel LastChildFill="False">
-            <DataGrid x:Name="dgCustomers" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" 
-                      Margin="10,10,300,225" Width="477" />
+            <DataGrid x:Name="dgCustomers" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" AutoGenerateColumns="False" 
+                      Margin="10,10,300,225">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding CustomerId}"/>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </DockPanel>
 
-        <StackPanel Margin="490,10,0,10">
-            <Label Content="First Name" Width="121"/>
-            <TextBox x:Name="FirstName" TextWrapping="Wrap"  Width="120" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Content="Last Name" Width="121"/>
-            <TextBox x:Name="LastName" TextWrapping="Wrap"  Width="120" Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Content="Email" Width="121"/>
-            <TextBox x:Name="Email" TextWrapping="Wrap"  Width="120" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Label Content="Phone Number" Width="121"/>
-            <TextBox x:Name="PhoneNumber" TextWrapping="Wrap"  Width="120" Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <Grid>
-                <Button Content="Add" Margin="10,10,225,0" Width="50" Command="{Binding AddCustomerCommand}"/>
-                <Button Content="Update" Margin="126,10,124,0" Width="50" Command="{Binding EditCustomerCommand}"/>
-                <Button Content="Delete" Margin="225,10,10,0" Width="50" Command="{Binding DeleteCustomerCommand}"/>
+        <StackPanel Margin="490,10,10,10">
+            <Label Content="First Name" />
+            <TextBox x:Name="FirstName" TextWrapping="Wrap" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Last Name" />
+            <TextBox x:Name="LastName" TextWrapping="Wrap" Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Email" />
+            <TextBox x:Name="Email" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Phone Number" />
+            <TextBox x:Name="PhoneNumber" TextWrapping="Wrap" Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Margin="0,10,0,0">
+                <Button Content="Add" Command="{Binding AddCustomerCommand}" HorizontalAlignment="Left" Width="50"/>
+                <Button Content="Update" Command="{Binding EditCustomerCommand}" HorizontalAlignment="Center" Width="50"/>
+                <Button Content="Delete" Command="{Binding DeleteCustomerCommand}" HorizontalAlignment="Right" Width="50"/>
             </Grid>
         </StackPanel>
 

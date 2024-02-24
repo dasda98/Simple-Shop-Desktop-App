@@ -10,15 +10,43 @@
 
     <Grid Background="White">
         <DockPanel LastChildFill="False">
-            <DataGrid x:Name="dgOrders" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay}" AutoGenerateColumns="False" 
-              Margin="10,10,300,225" Width="477">
+            <DataGrid x:Name="dgOrders" 
+                      ItemsSource="{Binding Orders}" 
+                      SelectedItem="{Binding SelectedOrder, Mode=TwoWay}" 
+                      AutoGenerateColumns="False" 
+                      Margin="10,10,0,0" 
+                      VerticalAlignment="Top" HorizontalAlignment="Left">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding OrderId}"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding OrderId}"/>
                     <DataGridTextColumn Header="Date" Binding="{Binding OrderDate}"/>
                     <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}"/>
-                    <DataGridTextColumn Header="Customer" Binding="{Binding Customer.FirstName}"/>
+                    <DataGridTextColumn Header="Customer">
+                        <DataGridTextColumn.Binding>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="Customer.FirstName"/>
+                                <Binding Path="Customer.LastName"/>
+                            </MultiBinding>
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <ComboBox Margin="100,10,0,0" 
+                      Height="25" Width="138"
+                      ItemsSource="{Binding Customers}"  
+                      VerticalAlignment="Top" HorizontalAlignment="Left">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="FirstName" />
+                                    <Binding Path="LastName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </DockPanel>
     </Grid>
 </Page>
