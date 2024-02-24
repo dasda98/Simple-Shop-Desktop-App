@@ -62,5 +62,20 @@ namespace MarketApp.ViewModel
         {
             _orders = new ObservableCollection<Order>(_orderService.GetAllOrders());
         }
+
+        private Customer _selectedCustomer;
+        public Customer SelectedCustomer
+        {
+            get { return _selectedCustomer; }
+            set
+            {
+                if (value != _selectedCustomer)
+                {
+                    _selectedCustomer = value;
+                        
+                    OnPropertyChanged(nameof(SelectedCustomer));
+                }
+            }
+        }
     }
 }

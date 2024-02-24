@@ -32,7 +32,8 @@
             </DataGrid>
             <ComboBox Margin="100,10,0,0" 
                       Height="25" Width="138"
-                      ItemsSource="{Binding Customers}"  
+                      ItemsSource="{Binding Customers}"
+                      SelectedItem="{Binding SelectedCustomer}"
                       VerticalAlignment="Top" HorizontalAlignment="Left">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
