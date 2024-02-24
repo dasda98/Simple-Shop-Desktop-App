@@ -11,7 +11,7 @@
     <Grid Background="White">
         <DockPanel LastChildFill="False">
             <DataGrid x:Name="dgOrders" 
-                      ItemsSource="{Binding Orders}" 
+                      ItemsSource="{Binding SelectedCustomer.Orders}" 
                       SelectedItem="{Binding SelectedOrder, Mode=TwoWay}" 
                       AutoGenerateColumns="False" 
                       Margin="10,10,0,0" 
@@ -20,14 +20,6 @@
                     <DataGridTextColumn Header="ID" Binding="{Binding OrderId}"/>
                     <DataGridTextColumn Header="Date" Binding="{Binding OrderDate}"/>
                     <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}"/>
-                    <DataGridTextColumn Header="Customer">
-                        <DataGridTextColumn.Binding>
-                            <MultiBinding StringFormat="{}{0} {1}">
-                                <Binding Path="Customer.FirstName"/>
-                                <Binding Path="Customer.LastName"/>
-                            </MultiBinding>
-                        </DataGridTextColumn.Binding>
-                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <ComboBox Margin="100,10,0,0" 
