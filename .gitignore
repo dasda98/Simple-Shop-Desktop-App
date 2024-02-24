@@ -20,3 +20,6 @@ build/
 *.nuget.props
 *.nuget.targets
 *.lock.json
+
+# User
+Migrations
