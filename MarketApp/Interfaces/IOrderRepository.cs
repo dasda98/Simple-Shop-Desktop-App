@@ -5,9 +5,9 @@ namespace MarketApp.Interfaces
     public interface IOrderRepository
     {
         List<Order> GetAllOrders();
-        Order GetById(int id);
+        Order GetById(int orderId);
         void AddOrder(Order order);
         void UpdateOrder(Order order);
-        void DeleteOrder(int id);
+        void DeleteOrder(int orderId);
     }
 }
