@@ -18,19 +18,19 @@ namespace MarketApp.Repositories
             return _databaseContext.Orders.FirstOrDefault(c => c.OrderId == id);
         }
 
-        public void AddOrder(Order order)
+        public void Add(Order order)
         {
             _databaseContext.Orders.Add(order);
             _databaseContext.SaveChanges();
         }
 
-        public void UpdateOrder(Order order)
+        public void Update(Order order)
         {
             _databaseContext.Orders.Update(order);
             _databaseContext.SaveChanges();
         }
 
-        public void DeleteOrder(int id)
+        public void Delete(int id)
         {
             var order = GetById(id);
             if (order != null)
@@ -39,7 +39,7 @@ namespace MarketApp.Repositories
                 _databaseContext.SaveChanges();
             }
         }
-        public List<Order> GetAllOrders()
+        public List<Order> GetAll()
         {
             return _databaseContext.Orders.ToList();
         }

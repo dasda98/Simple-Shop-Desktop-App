@@ -42,7 +42,7 @@ namespace MarketApp.ViewModel
 
         private void LoadCustomers()
         {
-            _customers = new ObservableCollection<Customer>(_customerService.GetAllCustomers());
+            _customers = new ObservableCollection<Customer>(_customerService.GetAll());
         }
 
         private string _firstName;
@@ -102,7 +102,7 @@ namespace MarketApp.ViewModel
         private void AddCustomer(object parameter)
         {
             Customer newCustomer = new Customer { FirstName=FirstName, LastName=LastName, Email=Email, PhoneNumber=PhoneNumber };
-            _customerService.AddCustomer(newCustomer);
+            _customerService.Add(newCustomer);
             _customers.Add(newCustomer);
 
             FirstName = string.Empty;
@@ -128,7 +128,7 @@ namespace MarketApp.ViewModel
 
         private void DeleteCustomer(object parameter)
         {
-            _customerService.DeleteCustomer(_selectedCustomer.CustomerId);
+            _customerService.Delete(_selectedCustomer.CustomerId);
             _customers.Remove(_selectedCustomer);
         }
 
@@ -165,7 +165,7 @@ namespace MarketApp.ViewModel
             _selectedCustomer.Email = _email;
             _selectedCustomer.PhoneNumber = _phoneNumber;
 
-            _customerService.UpdateCustomer(_selectedCustomer);
+            _customerService.Update(_selectedCustomer);
 
             CollectionViewSource.GetDefaultView(Customers).Refresh();
 

@@ -9,10 +9,10 @@ namespace MarketApp.Interfaces
 {
     public interface IItemRepository
     {
-        List<Item> GetAllItems();
-        Item GetItemById(int itemId);
-        void AddItem(Item item);
-        void UpdateItem(Item item);
-        void DeleteItem(int itemId);
+        List<Item> GetAll();
+        Item GetById(int id);
+        void Add(Item obj);
+        void Update(Item obj);
+        void Delete(int id);
     }
 }

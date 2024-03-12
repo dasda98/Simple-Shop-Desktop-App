@@ -56,11 +56,11 @@ namespace MarketApp.ViewModel
 
         private void LoadCustomers()
         {
-            _customers = new ObservableCollection<Customer>(_customerService.GetAllCustomers());
+            _customers = new ObservableCollection<Customer>(_customerService.GetAll());
         }
         private void LoadOrders()
         {
-            _orders = new ObservableCollection<Order>(_orderService.GetAllOrders());
+            _orders = new ObservableCollection<Order>(_orderService.GetAll());
         }
 
         private Customer _selectedCustomer;

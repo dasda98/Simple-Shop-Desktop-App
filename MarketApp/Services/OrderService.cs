@@ -12,29 +12,29 @@ namespace MarketApp.Services
             _orderRepository = orderRepository;
         }
 
-        public void AddOrder(Order order)
+        public void Add(Order order)
         {
-            _orderRepository.AddOrder(order);
+            _orderRepository.Add(order);
         }
 
-        public void DeleteOrder(int orderId)
+        public void Delete(int orderId)
         {
-            _orderRepository.DeleteOrder(orderId);
+            _orderRepository.Delete(orderId);
         }
 
-        public List<Order> GetAllOrders()
+        public List<Order> GetAll()
         {
-            return _orderRepository.GetAllOrders();
+            return _orderRepository.GetAll();
         }
 
-        public Order GetOrderById(int orderId)
+        public Order GetById(int orderId)
         {
             return _orderRepository.GetById(orderId);
         }
 
-        public void UpdateOrder(Order order)
+        public void Update(Order order)
         {
-            _orderRepository.UpdateOrder(order);
+            _orderRepository.Update(order);
         }
     }
 }

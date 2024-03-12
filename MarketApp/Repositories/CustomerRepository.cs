@@ -18,26 +18,26 @@ namespace MarketApp.Repositories
             _databaseContext = databaseContext;
         }
 
-        public Customer GetCustomerById(int id)
+        public Customer GetById(int id)
         {
             return _databaseContext.Customers.FirstOrDefault(c => c.CustomerId == id);
         }
 
-        public void AddCustomer(Customer customer)
+        public void Add(Customer customer)
         {
             _databaseContext.Customers.Add(customer);
             _databaseContext.SaveChanges();
         }
 
-        public void UpdateCustomer(Customer customer)
+        public void Update(Customer customer)
         {
             _databaseContext.Customers.Update(customer);
             _databaseContext.SaveChanges();
         }
 
-        public void DeleteCustomer(int id)
+        public void Delete(int id)
         {
-            var customer = GetCustomerById(id);
+            var customer = GetById(id);
             if (customer != null)
             {
                 _databaseContext.Customers.Remove(customer);
@@ -45,7 +45,7 @@ namespace MarketApp.Repositories
             }
         }
 
-        public List<Customer> GetAllCustomers()
+        public List<Customer> GetAll()
         {
             return _databaseContext.Customers.ToList();
         }

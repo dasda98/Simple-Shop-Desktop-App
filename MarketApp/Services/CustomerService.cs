@@ -12,30 +12,29 @@ namespace MarketApp.Services
             _customerRepository = customerRepository;
         }
 
-        public void AddCustomer(Customer customer)
+        public void Add(Customer customer)
         {
-            _customerRepository.AddCustomer(customer);
+            _customerRepository.Add(customer);
         }
 
-        public void DeleteCustomer(int customerId)
+        public void Delete(int customerId)
         {
-            _customerRepository.DeleteCustomer(customerId);
+            _customerRepository.Delete(customerId);
         }
 
-        public List<Customer> GetAllCustomers()
+        public List<Customer> GetAll()
         {
-            return _customerRepository.GetAllCustomers();
+            return _customerRepository.GetAll();
         }
 
-        public Customer GetCustomerById(int customerId)
+        public Customer GetById(int customerId)
         {
-            return _customerRepository.GetCustomerById(customerId);
+            return _customerRepository.GetById(customerId);
         }
 
-        public void UpdateCustomer(Customer customer)
+        public void Update(Customer customer)
         {
-
-            _customerRepository.UpdateCustomer(customer);
+            _customerRepository.Update(customer);
         }
     }
 }
