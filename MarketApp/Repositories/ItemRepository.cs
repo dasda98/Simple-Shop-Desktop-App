@@ -24,9 +24,9 @@ namespace MarketApp.Repositories
             _databaseContext.SaveChanges();
         }
 
-        public void Delete(int itemId)
+        public void Delete(int id)
         {
-            var item = GetById(itemId);
+            var item = GetById(id);
             if (item != null)
             {
                 _databaseContext.Items.Remove(item);
@@ -39,9 +39,9 @@ namespace MarketApp.Repositories
             return _databaseContext.Items.ToList();
         }
 
-        public Item GetById(int itemId)
+        public Item GetById(int id)
         {
-            return _databaseContext.Items.FirstOrDefault(x => x.ItemId == itemId);
+            return _databaseContext.Items.FirstOrDefault(x => x.ItemId == id);
         }
 
         public void Update(Item item)

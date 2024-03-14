@@ -39,6 +39,16 @@ namespace MarketApp
 
             services.AddTransient<OrderViewModel>();
 
+            services.AddTransient<IItemService, ItemService>();
+            services.AddTransient<IItemRepository, ItemRepository>();
+
+            //services.AddTransient<OrderViewModel>();
+
+            services.AddTransient<IOrderItemService, OrderItemService>();
+            services.AddTransient<IOrderItemRepository, OrderItemRepository>();
+
+            //services.AddTransient<OrderViewModel>();
+
             return services.BuildServiceProvider();
         }
 
