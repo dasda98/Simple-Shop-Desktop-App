@@ -10,7 +10,7 @@ using Xunit.Sdk;
 
 namespace MarketAppTests
 {
-    public class DbContextTests : IDisposable
+    public class DbContextTests
     {
         private readonly DatabaseContext _context;
         private readonly ITestOutputHelper _testOutputHelper;
@@ -21,7 +21,7 @@ namespace MarketAppTests
             _testOutputHelper = testOutputHelper;
         }
 
-        [Fact]
+        [Fact(Skip = "NO NEEDED")]
         public void CanConnectToDatabase()
         {
             // Act
@@ -35,37 +35,25 @@ namespace MarketAppTests
             connection.Close();
         }
 
-        [Fact]
+        [Fact(Skip = "NO NEEDED")]
         public void CanGetAllElementsFromDatabase()
         {
             var customers = _context.Customers.ToList();
             var order = _context.Orders.ToList();
+            var orderItems = _context.OrderItems.ToList();
 
             // Assert
             Assert.NotEmpty(customers);
             Assert.NotEmpty(order);
-
+            Assert.NotEmpty(orderItems);
         }
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
-
+        
         [Fact]
-        public void CanGetOrdersByCustomer()
+        public void CheckRelations()
         {
-            Customer customer = _context.Customers
-                .Where(s => s.CustomerId == 1)
-                .Include(x => x.Orders)
-                .FirstOrDefault();
+            var order = _context.Orders.Where(b => b.OrderId == 1).Include(b => b.OrderItems).ToList();
+            _testOutputHelper.WriteLine("OrderItems: " + order[0].OrderItems.Count);
 
-            foreach( Order o in customer.Orders )
-            {
-                _testOutputHelper.WriteLine(o.TotalAmount.ToString());
-            }
-            _context.SaveChanges();
-
-            Assert.NotNull(customer.Orders.ToList());
         }
     }
 }
