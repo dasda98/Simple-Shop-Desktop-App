@@ -51,9 +51,8 @@ namespace MarketAppTests
         [Fact]
         public void CheckRelations()
         {
-            var order = _context.Orders.Where(b => b.OrderId == 1).Include(b => b.OrderItems).ToList();
-            _testOutputHelper.WriteLine("OrderItems: " + order[0].OrderItems.Count);
-
+            var order = _context.Orders.Where(b => b.OrderId == 1).ToList();
+            _testOutputHelper.WriteLine("OrderItems lazy: " + order[0].OrderItems.Count);
         }
     }
 }
