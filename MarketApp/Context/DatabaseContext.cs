@@ -31,17 +31,24 @@ namespace MarketApp.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("test");
-            //modelBuilder.Entity<Order>()
-            //    .HasOne(e => e.Customer)
-            //    .WithMany(e => e.Orders)
-            //    .HasForeignKey(e => e.CustomerId)
-            //    .OnDelete(DeleteBehavior.Cascade)
-            //    .IsRequired();
+            modelBuilder.Entity<Order>()
+                .HasOne(e => e.Customer)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.CustomerId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne<Order>(e => e.Order)
+                .WithMany(p => p.OrderItems);
+            modelBuilder.Entity<OrderItem>()
+                .HasOne<Item>(e => e.Item)
+                .WithMany(p => p.OrderItems);
 
             Customer customer1 = new Customer {
                 CustomerId = 1,
                 FirstName = "Jakub",
-                LastName = "Wojniak",
+                LastName = "Test",
                 Email = "test@test.pl",
                 PhoneNumber = "123456789"
             };
