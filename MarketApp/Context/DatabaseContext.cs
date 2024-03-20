@@ -24,6 +24,7 @@ namespace MarketApp.Context
 
                 string connectionString = configuration.GetConnectionString("MyPostgresConnection");
 
+                optionsBuilder.UseLazyLoadingProxies();
                 optionsBuilder.UseNpgsql(connectionString);
             }
         }
@@ -45,14 +46,15 @@ namespace MarketApp.Context
                 .HasOne<Item>(e => e.Item)
                 .WithMany(p => p.OrderItems);
 
-            Customer customer1 = new Customer {
+            Customer customer1 = new()
+            {
                 CustomerId = 1,
                 FirstName = "Jakub",
                 LastName = "Test",
                 Email = "test@test.pl",
                 PhoneNumber = "123456789"
             };
-            Customer customer2 = new Customer
+            Customer customer2 = new()
             {
                 CustomerId = 2,
                 FirstName = "Kacper",
@@ -61,17 +63,17 @@ namespace MarketApp.Context
                 PhoneNumber = "987654321"
             };
 
-            Order order1 = new Order { OrderId = 1, OrderDate = DateTime.UtcNow, TotalAmount = 270.0f, CustomerId = 1 };
-            Order order2 = new Order { OrderId = 2, OrderDate = DateTime.UtcNow, TotalAmount = 300.0f, CustomerId = 1 };
-            Order order3 = new Order { OrderId = 3, OrderDate = DateTime.UtcNow, TotalAmount = 100.0f, CustomerId = 2 };
+            Order order1 = new() { OrderId = 1, OrderDate = DateTime.UtcNow, TotalAmount = 270.0f, CustomerId = 1 };
+            Order order2 = new() { OrderId = 2, OrderDate = DateTime.UtcNow, TotalAmount = 300.0f, CustomerId = 1 };
+            Order order3 = new() { OrderId = 3, OrderDate = DateTime.UtcNow, TotalAmount = 100.0f, CustomerId = 2 };
 
-            Item item1 = new Item { ItemId = 1, ItemName = "Keyboard", UnitPrice = 35.0f };
-            Item item2 = new Item { ItemId = 2, ItemName = "Mouse", UnitPrice = 100.0f };
+            Item item1 = new() { ItemId = 1, ItemName = "Keyboard", UnitPrice = 35.0f };
+            Item item2 = new() { ItemId = 2, ItemName = "Mouse", UnitPrice = 100.0f };
 
-            OrderItem orderItem1 = new OrderItem { OrderItemId = 1, OrderId = 1, ItemId = 1,  Quantity = 2};
-            OrderItem orderItem2 = new OrderItem { OrderItemId = 2, OrderId = 1, ItemId = 2,  Quantity = 2};
-            OrderItem orderItem3 = new OrderItem { OrderItemId = 3, OrderId = 2, ItemId = 2,  Quantity = 3};
-            OrderItem orderItem4 = new OrderItem { OrderItemId = 4, OrderId = 3, ItemId = 2,  Quantity = 1};
+            OrderItem orderItem1 = new() { OrderItemId = 1, OrderId = 1, ItemId = 1,  Quantity = 2};
+            OrderItem orderItem2 = new() { OrderItemId = 2, OrderId = 1, ItemId = 2,  Quantity = 2};
+            OrderItem orderItem3 = new() { OrderItemId = 3, OrderId = 2, ItemId = 2,  Quantity = 3};
+            OrderItem orderItem4 = new() { OrderItemId = 4, OrderId = 3, ItemId = 2,  Quantity = 1};
 
             List<Order> orders = [order1, order2, order3];
             List<Customer> customers = [customer1, customer2];
